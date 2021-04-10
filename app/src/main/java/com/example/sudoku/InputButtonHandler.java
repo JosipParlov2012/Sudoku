@@ -32,7 +32,7 @@ public class InputButtonHandler {
     private static void handleClick(View view, List<Button> allButtons) {
         Button button = (Button) view;
         String text = button.getText().toString();
-        ACTIVE_VALUE = text.equals("Delete") ? "" : text;
+        ACTIVE_VALUE = text.equals("Delete") ? "0" : text;
 
         for (Button aButton : allButtons) {
             boolean activated = aButton.getId() != button.getId();
