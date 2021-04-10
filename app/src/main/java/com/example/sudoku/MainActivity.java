@@ -1,23 +1,27 @@
 package com.example.sudoku;
 
 import android.os.Bundle;
-
-import de.sfuhrm.sudoku.Riddle;
-import de.sfuhrm.sudoku.Creator;
-import de.sfuhrm.sudoku.GameMatrix;
+import android.widget.TextView;
+import android.annotation.SuppressLint;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+	@SuppressLint("SetTextI18n")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		// Example code.
-		GameMatrix matrix = Creator.createFull();
-		Riddle riddle = Creator.createRiddle(matrix);
+		// Test code.
+		TextView textView = findViewById(R.id.Row1Column1);
+		textView.setOnClickListener(view -> {
+			TextView textVar = (TextView) view;
+			String text = textVar.getText().toString();
+			int num = Integer.parseInt(text);
+			textVar.setText((num + 1) + "");
+		});
 	}
 
 }
