@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		initiateWidgets();
+		InputButtonHandler.initiate(buttonsNumbers, buttonDelete);
 	}
 
 	private void initiateWidgets() {
