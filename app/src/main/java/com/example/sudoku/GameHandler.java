@@ -3,7 +3,9 @@ package com.example.sudoku;
 import java.util.List;
 
 import de.sfuhrm.sudoku.Riddle;
+import de.sfuhrm.sudoku.Solver;
 import de.sfuhrm.sudoku.Creator;
+import de.sfuhrm.sudoku.GameMatrix;
 
 import android.graphics.Color;
 import android.widget.TextView;
@@ -16,10 +18,11 @@ public class GameHandler {
     private static List<List<TextView>> textCells;
 
     private static Riddle riddle;
+    private static List<GameMatrix> solutions;
 
     private GameHandler() {}
 
-    public static void initiate(List<List<TextView>> textCells) {
+    public static void initiate(MainActivity mainActivity, List<List<TextView>> textCells) {
         GameHandler.textCells = textCells;
 
         for (List<TextView> rowData : textCells) {
@@ -32,6 +35,14 @@ public class GameHandler {
                     cell.setTextColor(value.equals("0") ? Color.WHITE : Color.BLACK);
 
                     saveToData();
+
+                    boolean isComplete = false;
+                    for (GameMatrix solution : solutions) {
+                        if (!solution.equals(riddle)) continue;
+                        isComplete = true;
+                    }
+                    if (!isComplete) return;
+                    WinDialog.display(mainActivity);
                 });
             }
         }
@@ -42,6 +53,7 @@ public class GameHandler {
     @SuppressLint("SetTextI18n")
     public static void createNewGame() {
         riddle = Creator.createRiddle(Creator.createFull());
+        solutions = new Solver(riddle).solve();
 
         // Apply data to display.
         byte[][] array = riddle.getArray();

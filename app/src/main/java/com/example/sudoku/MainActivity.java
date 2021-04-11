@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 		initiateWidgets();
 		InputButtonHandler.initiate(buttonsNumbers, buttonDelete);
-		GameHandler.initiate(textCells);
+		GameHandler.initiate(this, textCells);
 		buttonRestart.setOnClickListener(v -> GameHandler.createNewGame());
 	}
 
