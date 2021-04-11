@@ -921,19 +921,19 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/Number8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="8"
-                    tools:ignore="ButtonStyle,HardcodedText,NestedWeights" />
-
-                <Button
                     android:id="@+id/Number7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="7"
+                    tools:ignore="ButtonStyle,HardcodedText,NestedWeights" />
+
+                <Button
+                    android:id="@+id/Number8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="8"
                     tools:ignore="ButtonStyle,HardcodedText" />
 
                 <Button
