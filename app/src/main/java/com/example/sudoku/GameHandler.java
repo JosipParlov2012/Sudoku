@@ -81,4 +81,21 @@ public class GameHandler {
         }
     }
 
+    @SuppressLint("SetTextI18n")
+    public static void fillSolution() {
+        if (solutions.isEmpty()) return;
+        GameMatrix solution = solutions.get(0);
+        byte[][] array = solution.getArray();
+        for (int row = 0; row < array.length; row++) {
+            byte[] rowData = array[row];
+            for (int column = 0; column < rowData.length; column++) {
+                byte value = rowData[column];
+                TextView cell = textCells.get(row).get(column);
+                if (!cell.getText().equals("0")) continue;
+                cell.setText(value + "");
+                cell.setTextColor(Color.BLACK);
+            }
+        }
+    }
+
 }

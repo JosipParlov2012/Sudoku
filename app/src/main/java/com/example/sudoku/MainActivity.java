@@ -49,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
 		InputButtonHandler.initiate(buttonsNumbers, buttonDelete);
 		GameHandler.initiate(this, textCells);
 		buttonRestart.setOnClickListener(v -> GameHandler.createNewGame());
+
+		// Testing...
+		buttonRestart.setOnLongClickListener(v -> {
+			GameHandler.fillSolution();
+			return false;
+		});
 	}
 
 	private void initiateWidgets() {
