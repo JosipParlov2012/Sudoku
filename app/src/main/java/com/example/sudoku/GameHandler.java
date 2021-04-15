@@ -85,7 +85,7 @@ public class GameHandler {
             for (int column = 0; column < rowData.length; column++) {
                 TextView cell = textCells.get(row).get(column);
                 String value = rowData[column] + "";
-                if (!value.equals("0")) continue;
+                if (!cell.getText().equals("0")) continue;
                 writeToDisplay(cell, value);
             }
         }
