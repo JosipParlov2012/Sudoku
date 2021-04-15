@@ -3,6 +3,7 @@ package com.example.sudoku;
 import java.util.List;
 
 import android.graphics.Color;
+import android.app.AlertDialog;
 import android.widget.TextView;
 
 import de.sfuhrm.sudoku.Riddle;
@@ -38,7 +39,13 @@ public class GameHandler {
                         break;
                     }
                     if (!isComplete) return;
-                    WinDialog.display(mainActivity);
+
+                    new AlertDialog.Builder(mainActivity)
+                            .setTitle("Pobjedili ste!")
+                            .setMessage("Želite li ponovno igrati?")
+                            .setPositiveButton("Zatvori", (dialog, which) -> dialog.dismiss())
+                            .setNegativeButton("Nova igra", (dialog, which) -> GameHandler.createNewGame())
+                            .show();
                 });
             }
         }
