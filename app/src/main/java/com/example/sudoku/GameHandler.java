@@ -2,14 +2,13 @@ package com.example.sudoku;
 
 import java.util.List;
 
+import android.graphics.Color;
+import android.widget.TextView;
+
 import de.sfuhrm.sudoku.Riddle;
 import de.sfuhrm.sudoku.Solver;
 import de.sfuhrm.sudoku.Creator;
 import de.sfuhrm.sudoku.GameMatrix;
-
-import android.graphics.Color;
-import android.widget.TextView;
-import android.annotation.SuppressLint;
 
 public class GameHandler {
 
@@ -28,18 +27,15 @@ public class GameHandler {
         for (List<TextView> rowData : textCells) {
             for (TextView textView : rowData) {
                 textView.setOnClickListener(view -> {
-                    TextView cell = (TextView) view;
-                    String value = InputButtonHandler.getActiveValue();
-
-                    cell.setText(value);
-                    cell.setTextColor(value.equals("0") ? Color.WHITE : Color.BLACK);
-
+                    writeToDisplay((TextView) view, InputButtonHandler.getActiveValue());
                     saveToData();
 
+                    // Check if user won.
                     boolean isComplete = false;
                     for (GameMatrix solution : solutions) {
                         if (!solution.equals(riddle)) continue;
                         isComplete = true;
+                        break;
                     }
                     if (!isComplete) return;
                     WinDialog.display(mainActivity);
@@ -50,24 +46,10 @@ public class GameHandler {
         createNewGame();
     }
 
-    @SuppressLint("SetTextI18n")
     public static void createNewGame() {
         riddle = Creator.createRiddle(Creator.createFull());
         solutions = new Solver(riddle).solve();
-
-        // Apply data to display.
-        byte[][] array = riddle.getArray();
-        for (int row = 0; row < array.length; row++) {
-            byte[] rowData = array[row];
-            for (int column = 0; column < rowData.length; column++) {
-                byte value = rowData[column];
-                TextView cell = textCells.get(row).get(column);
-                boolean isWritable = value == 0;
-                cell.setText(value + "");
-                cell.setClickable(isWritable);
-                cell.setTextColor(isWritable ? Color.WHITE : COLOR_LOCKED);
-            }
-        }
+        saveToDisplay();
     }
 
     private static void saveToData() {
@@ -81,7 +63,19 @@ public class GameHandler {
         }
     }
 
-    @SuppressLint("SetTextI18n")
+    private static void saveToDisplay() {
+        byte[][] array = riddle.getArray();
+        for (int row = 0; row < array.length; row++) {
+            byte[] rowData = array[row];
+            for (int column = 0; column < rowData.length; column++) {
+                String value = rowData[column] + "";
+                TextView cell = textCells.get(row).get(column);
+                writeToDisplay(cell, value, true);
+                cell.setClickable(value.equals("0"));
+            }
+        }
+    }
+
     public static void fillSolution() {
         if (solutions.isEmpty()) return;
         GameMatrix solution = solutions.get(0);
@@ -89,13 +83,22 @@ public class GameHandler {
         for (int row = 0; row < array.length; row++) {
             byte[] rowData = array[row];
             for (int column = 0; column < rowData.length; column++) {
-                byte value = rowData[column];
                 TextView cell = textCells.get(row).get(column);
-                if (!cell.getText().equals("0")) continue;
-                cell.setText(value + "");
-                cell.setTextColor(Color.BLACK);
+                String value = rowData[column] + "";
+                if (!value.equals("0")) continue;
+                writeToDisplay(cell, value);
             }
         }
+    }
+
+    private static void writeToDisplay(TextView cell, String value) {
+        writeToDisplay(cell, value, false);
+    }
+
+    private static void writeToDisplay(TextView cell, String value, boolean isFixed) {
+        cell.setText(value);
+        boolean isWritable = value.equals("0");
+        cell.setTextColor(isWritable ? Color.WHITE : isFixed ? COLOR_LOCKED : Color.BLACK);
     }
 
 }
