@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 	};
 
 	private static final int[] ID_NUMBERS = new int[] {
-			R.id.Number0,
 			R.id.Number1,
 			R.id.Number2,
 			R.id.Number3,

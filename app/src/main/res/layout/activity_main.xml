@@ -879,6 +879,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
@@ -888,14 +889,6 @@
                     android:layout_weight="1"
                     android:text="@string/delete"
                     tools:ignore="ButtonStyle,NestedWeights" />
-
-                <Button
-                    android:id="@+id/Number0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0"
-                    tools:ignore="ButtonStyle,HardcodedText" />
 
                 <Button
                     android:id="@+id/Restart"
