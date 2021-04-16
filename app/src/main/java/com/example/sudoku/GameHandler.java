@@ -64,8 +64,7 @@ public class GameHandler {
             List<TextView> rowData = textCells.get(row);
             for (int column = 0; column < rowData.size(); column++) {
                 String text = rowData.get(column).getText().toString();
-                byte value = text.isEmpty() ? 0 : Byte.parseByte(text);
-                riddle.set(row, column, value);
+                riddle.set(row, column, Byte.parseByte(text));
             }
         }
     }
