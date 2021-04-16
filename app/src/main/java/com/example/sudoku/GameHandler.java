@@ -22,7 +22,7 @@ public class GameHandler {
 
     private GameHandler() {}
 
-    public static void initiate(MainActivity mainActivity, List<List<TextView>> textCells) {
+    public static void initialise(MainActivity mainActivity, List<List<TextView>> textCells) {
         GameHandler.textCells = textCells;
 
         for (List<TextView> rowData : textCells) {

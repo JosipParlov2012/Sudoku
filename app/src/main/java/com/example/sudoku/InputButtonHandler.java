@@ -17,7 +17,7 @@ public class InputButtonHandler {
         return ACTIVE_VALUE;
     }
 
-    public static void initiate(List<Button> buttonsNumbers, Button buttonDelete) {
+    public static void initialise(List<Button> buttonsNumbers, Button buttonDelete) {
         List<Button> allButtons = new ArrayList<>(buttonsNumbers);
         allButtons.add(buttonDelete);
 
