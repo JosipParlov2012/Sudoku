@@ -41,7 +41,7 @@ public class GameHandler {
                     if (!isComplete) return;
 
                     new AlertDialog.Builder(mainActivity)
-                            .setTitle("Pobjedili ste!")
+                            .setTitle("Pobijedili ste!")
                             .setMessage("Želite li ponovno igrati?")
                             .setPositiveButton("Zatvori", (dialog, which) -> dialog.dismiss())
                             .setNegativeButton("Nova igra", (dialog, which) -> GameHandler.createNewGame())
